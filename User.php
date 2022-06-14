@@ -41,11 +41,25 @@ class User
         return $tot;
     }
 
-    public function resultPayment()
+    public function faildPayment()
     {
-        for ($i = 2; $i >= 0; $i--) {
+        $isExpired = true;
+        $continueFor = true;
+        for ($i = 2; $i >= 0 && $continueFor; $i--) {
             $currentDate = explode("-", $this->currentDate)[$i];
             $cardDate = explode("-", $this->cardExpiring)[$i];
+            var_dump($currentDate);
+            var_dump($cardDate);
+            if ($currentDate < $cardDate) {
+                $isExpired = false;
+                $continueFor = false;
+            } elseif ($currentDate === $cardDate) {
+                $continueFor = true;
+            } else {
+                $isExpired = true;
+                $continueFor = false;
+            }
         }
+        return $isExpired;
     }
 }

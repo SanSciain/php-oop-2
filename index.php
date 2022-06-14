@@ -5,7 +5,7 @@ require_once __DIR__ . "/Food.php";
 require_once __DIR__ . "/Gadget.php";
 require_once __DIR__ . "/User.php";
 
-$io = new User("Artuto", "Della Valle", "12-9-2024", "14-6-2022");
+$io = new User("Artuto", "Della Valle", "12-6-2024", "14-6-2022");
 
 $products = [];
 $products[] = new Toy("tennis ball", 3, "plastic", "2-12");
@@ -30,4 +30,11 @@ $io->addTo($products[3]);
     }
     ?>
     <p>Prezzo totale: euro <?php echo $io->total(); ?> </p>
+
+    <?php if ($io->faildPayment()) {
+        echo "<p>Pagamento non riuscito, carta scaduta</p>";
+    } else {
+        echo "<p>Pagamento andato a buon fine</p>";
+    }
+    ?>
 </ul>
